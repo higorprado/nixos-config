@@ -1,0 +1,6 @@
+result
+*.swp
+.direnv
+.env
+secrets/*
+hosts/predator/local.nix
