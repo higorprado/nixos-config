@@ -10,10 +10,15 @@
     };
 
     dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    danksearch = {
+      url = "github:AvengeMedia/danksearch";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,7 +36,7 @@
         inputs.disko.nixosModules.disko
         inputs.dms.nixosModules.dank-material-shell
         inputs.home-manager.nixosModules.home-manager
-
+        
         ./hosts/predator
       ];
     };

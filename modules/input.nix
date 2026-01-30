@@ -9,7 +9,7 @@
 
   services.xserver.xkb = {
     layout = "us";
-    variant = "intl";
+    variant = "alt-intl";
     model = "pc105";
   };
 

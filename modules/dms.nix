@@ -1,7 +1,7 @@
 { ... }:
 {
   programs.dank-material-shell = {
-  enable = true;
+    enable = true;
 
   systemd = {
     enable = true;
@@ -15,4 +15,5 @@
   enableCalendarEvents = true;
   enableClipboardPaste = true;
   };
+  programs.dsearch.enable = true;
 }
