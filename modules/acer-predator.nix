@@ -38,7 +38,7 @@ let
       owner = "higorprado";
       repo = "predator-tui";
       rev = "main";
-      sha256 = "sha256-RmZvPomNzCGdePax8qLjolZq5SRzxKg6TpDEYvH7ic0=";
+      sha256 = "sha256-luRM+nPfuYXtl4v3m4LAYZQEMuyR3lydaUBPBdlhWz0=";
     };
 
     vendorHash = "sha256-lKSr05aeK+HBxJKIbBPSesYpokf6D2Yol8p4OHHjNQ8=";

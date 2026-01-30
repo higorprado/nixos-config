@@ -1,8 +1,10 @@
-programs.dank-material-shell = {
+{ ... }:
+{
+  programs.dank-material-shell = {
   enable = true;
 
   systemd = {
-    enable = false;
+    enable = true;
     restartIfChanged = true;
   };
 
@@ -12,4 +14,5 @@ programs.dank-material-shell = {
   enableAudioWavelength = true;
   enableCalendarEvents = true;
   enableClipboardPaste = true;
-};
+  };
+}

@@ -12,7 +12,6 @@
     ../../modules/base.nix
     ../../modules/kernel.nix
     ../../modules/nix-settings.nix
-    ../../modules/networking.nix
     ../../modules/security.nix
     ../../modules/input.nix
     ../../modules/audio.nix
@@ -22,6 +21,8 @@
     ../../modules/acer-predator.nix
     ../../modules/dms.nix
     ../../modules/performance.nix
+    ../../modules/networking.nix
+    ../../modules/luks.nix
     ../../home/higorprado
   ];
 
