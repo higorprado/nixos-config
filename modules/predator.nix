@@ -1,7 +1,10 @@
-{ config, pkgs, customPkgs, ... }:
+{ config, lib, pkgs, customPkgs, ... }:
 
 let
-  linuwu-sense = config.boot.kernelPackages.callPackage customPkgs.linuwu-sense { };
+  # FIX: customPkgs.linuwu-sense provavelmente já é um pacote (derivation) ou não é um path.
+  # Para garantir que o "kernel" seja injetado, chama o ARQUIVO do módulo via kernelPackages.
+  linuwu-sense = config.boot.kernelPackages.callPackage ../pkgs/linuwu-sense.nix { };
+
   predator-tui = customPkgs.predator-tui;
 
   setPlatformProfileScript = pkgs.writeShellScript "set-platform-profile" ''
@@ -44,7 +47,6 @@ let
     pick_and_set "balanced" || \
     (echo "platform_profile: nenhum profile esperado encontrado. choices='$choices'" >&2; exit 0)
   '';
-
 in
 {
   # Acer Predator specific settings (from acer-predator.nix)
@@ -58,11 +60,6 @@ in
     "z /sys/devices/platform/acer-wmi 0775 root wheel - -"
     "Z /sys/devices/platform/acer-wmi - root wheel - -"
   ];
-
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="platform", DRIVER=="acer-wmi", RUN+="${pkgs.coreutils}/bin/chmod -R g+w /sys/devices/platform/acer-wmi/"
-    ACTION=="add", SUBSYSTEM=="platform", DRIVER=="acer-wmi", RUN+="${pkgs.coreutils}/bin/chgrp -R wheel /sys/devices/platform/acer-wmi/"
-  '';
 
   systemd.services.set-platform-profile = {
     description = "Set ACPI platform_profile (balanced-performance)";
@@ -156,15 +153,20 @@ in
     description = "Restart logid when Logitech device appears (%I)";
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "/run/current-system/sw/bin/systemctl --no-block restart logid.service";
+      ExecStart = "${pkgs.systemd}/bin/systemctl --no-block restart logid.service";
     };
   };
 
+  # Udev rules (acer-wmi + logiops)
   services.udev.extraRules = ''
-    # Mantém seu uaccess (ok)
+    # Acer WMI
+    ACTION=="add", SUBSYSTEM=="platform", DRIVER=="acer-wmi", RUN+="${pkgs.coreutils}/bin/chmod -R g+w /sys/devices/platform/acer-wmi/"
+    ACTION=="add", SUBSYSTEM=="platform", DRIVER=="acer-wmi", RUN+="${pkgs.coreutils}/bin/chgrp -R wheel /sys/devices/platform/acer-wmi/"
+
+    # LogiOps - uaccess para dispositivos Logitech
     KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", TAG+="uaccess"
 
-    # Quando surgir/atualizar um hidraw da Logitech, dispara o restart do logid.
+    # LogiOps - reinicia logid quando dispositivo Logitech aparece
     ACTION=="add|change", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="046d", TAG+="systemd", ENV{SYSTEMD_WANTS}+="logid-restart@%k.service"
   '';
 }
