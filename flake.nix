@@ -28,16 +28,17 @@
   outputs = inputs@{ nixpkgs, ... }:
   let
     system = "x86_64-linux";
+    customPkgs = import ./pkgs { pkgs = nixpkgs.legacyPackages.${system}; };
   in {
     nixosConfigurations.predator = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs customPkgs; };
       modules = [
         inputs.disko.nixosModules.disko
         inputs.dms.nixosModules.dank-material-shell
         inputs.dms.nixosModules.greeter
         inputs.home-manager.nixosModules.home-manager
-        
+
         ./hosts/predator
       ];
     };

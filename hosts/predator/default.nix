@@ -8,21 +8,12 @@
     ]
     ++ (if builtins.pathExists ./local.nix then [ ./local.nix ] else [])
     ++ [
-      ../../modules/base.nix
-      ../../modules/kernel.nix
-      ../../modules/nix-settings.nix
+      ../../modules/system.nix
+      ../../modules/hardware.nix
       ../../modules/security.nix
-      ../../modules/input.nix
-      ../../modules/audio.nix
-      ../../modules/nvidia.nix
       ../../modules/desktop.nix
+      ../../modules/predator.nix
       ../../modules/packages.nix
-      ../../modules/acer-predator.nix
-      ../../modules/dms.nix
-      ../../modules/performance.nix
-      ../../modules/networking.nix
-      ../../modules/luks.nix
-      ../../modules/logiops.nix
       ../../home/higorprado
     ];
 
