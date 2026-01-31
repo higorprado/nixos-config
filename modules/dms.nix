@@ -1,19 +1,32 @@
 { ... }:
 {
-  programs.dank-material-shell = {
-    enable = true;
+  programs = {
 
-  systemd = {
-    enable = true;
-    restartIfChanged = true;
-  };
+    dank-material-shell.greeter = {
+      enable = true;
+      compositor.name = "niri";
+      configHome = "/home/higorprado";
+      configFiles = [
+        "/home/higorprado/.config/DankMaterialShell/settings.json"
+      ];
+    };
+    
+    dank-material-shell = {
+      enable = true;
 
-  enableSystemMonitoring = true;
-  enableVPN = true;
-  enableDynamicTheming = true;
-  enableAudioWavelength = true;
-  enableCalendarEvents = true;
-  enableClipboardPaste = true;
+      systemd = {
+        enable = true;
+        restartIfChanged = true;
+      };
+
+      enableSystemMonitoring = true;
+      enableVPN = true;
+      enableDynamicTheming = true;
+      enableAudioWavelength = true;
+      enableCalendarEvents = true;
+      enableClipboardPaste = true;
+    };
+
+    dsearch.enable = true;
   };
-  programs.dsearch.enable = true;
 }

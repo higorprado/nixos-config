@@ -35,6 +35,7 @@
       modules = [
         inputs.disko.nixosModules.disko
         inputs.dms.nixosModules.dank-material-shell
+        inputs.dms.nixosModules.greeter
         inputs.home-manager.nixosModules.home-manager
         
         ./hosts/predator

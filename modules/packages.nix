@@ -8,7 +8,7 @@
     libsecret
     xwayland-satellite
     nvtopPackages.nvidia
-
+    nix-output-monitor
     papirus-icon-theme
     tela-icon-theme
     
