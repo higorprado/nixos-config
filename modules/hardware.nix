@@ -63,7 +63,12 @@
           pattern = {
             feature = "procname";
             matches = "niri";
+          }
+          {
+            pattern = { feature = "procname"; matches = ".quickshell-wra"; };
+            profile = "Limit Free Buffer Pool On Wayland Compositors";
           };
+          
           profile = "Limit Free Buffer Pool On Wayland Compositors";
         }
       ];
