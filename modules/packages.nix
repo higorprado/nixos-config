@@ -3,8 +3,10 @@
   environment.systemPackages = with pkgs; [
     vim neovim
     wget curl git unzip
+    ripgrep file binutils breakpad
     htop btop
     firefox chromium
+    logiops
     libsecret
     xwayland-satellite
     nvtopPackages.nvidia

@@ -22,6 +22,7 @@
       ../../modules/performance.nix
       ../../modules/networking.nix
       ../../modules/luks.nix
+      ../../modules/logiops.nix
       ../../home/higorprado
     ];
 
